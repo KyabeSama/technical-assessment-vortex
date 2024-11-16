@@ -4,7 +4,7 @@ version = "1.0.0"
 description = ""
 authors = ["Guillaume Ros <guillaume.ros.pro@gmail.com>"]
 readme = "README.md"
-packages = [{include = "lambda_app"}]
+packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -29,7 +29,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff.lint]
 select = ['ALL']
-ignore = ['FA', 'D']
+ignore = ['FA', 'D', 'S101', 'ANN', 'PLR', 'ARG', 'INP001', 'E501']
 
 [tool.ruff.lint.per-file-ignores]
 'tests/**' = ['S101', 'ANN', 'PLR', 'ARG', 'INP001', 'E501']

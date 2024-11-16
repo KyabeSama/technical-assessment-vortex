@@ -1,7 +1,7 @@
 """Entry points for the application."""
+from typing import Dict, Union
 
 import logging
-from typing import Dict, Union
 import json
 
 logger = logging.getLogger()
@@ -45,30 +45,20 @@ def lambda_handler(event: LambdaEvent, context: LambdaContext) -> LambdaOutput: 
 
     """
 
-    # TODO: write the lambda handler in a *robust* manner to:
-    # - fetch the message in the event body of the LambdaEvent
-    # - call the above 'process' function with the message and get the returned value
-    # - return the LambdaOutput with the following format:
-    # {
-    #        'statusCode': XXX,
-    #        'body': 'Return_value_of_process_function',
-    #    }
-    #
-
-    if "body" in event:  # Check if body exists in the event
-        event_body = json.loads(event.get("body"))  # Load the json into a dict
-        if "message" in event_body:  # Check if message exists in the body
-            statusCode = 200
-            message = event_body["message"]
+    if 'body' in event:  # Check if body exists in the event
+        event_body = json.loads(event.get('body'))  # Load the json into a dict
+        if 'message' in event_body:  # Check if message exists in the body
+            statuscode = 200
+            message = event_body['message']
         else:  # If message doesn't exists then error code and message
-            message = "There was no message"
-            statusCode = 404
+            message = 'There was no message'
+            statuscode = 404
     else:  # If body doesn't exists then error code and message
-        message = "There was no body in the message"
-        statusCode = 400
+        message = 'There was no body in the message'
+        statuscode = 400
 
-    returnBody = process(message)
+    returnbody = process(message)
     return {
-        'statusCode': statusCode,
-        'body': returnBody
+        'statuscode': statuscode,
+        'body': returnbody,
     }
