@@ -2,7 +2,7 @@
 
 import logging
 from typing import Dict, Union
-
+import json
 
 logger = logging.getLogger()
 logger.setLevel('INFO')
@@ -55,5 +55,20 @@ def lambda_handler(event: LambdaEvent, context: LambdaContext) -> LambdaOutput: 
     #    }
     #
 
-    ...
+    if "body" in event:  # Check if body exists in the event
+        event_body = json.loads(event.get("body"))  # Load the json into a dict
+        if "message" in event_body:  # Check if message exists in the body
+            statusCode = 200
+            message = event_body["message"]
+        else:  # If message doesn't exists then error code and message
+            message = "There was no message"
+            statusCode = 404
+    else:  # If body doesn't exists then error code and message
+        message = "There was no body in the message"
+        statusCode = 400
 
+    returnBody = process(message)
+    return {
+        'statusCode': statusCode,
+        'body': returnBody
+    }
