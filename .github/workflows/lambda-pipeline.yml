@@ -5,8 +5,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: talambda
-      
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   tests:
     runs-on: ubuntu-latest
