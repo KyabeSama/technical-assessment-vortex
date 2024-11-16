@@ -42,6 +42,7 @@ jobs:
         continue-on-error: false
   build:
     runs-on: ubuntu-latest
+    needs: tests
     permissions:
       contents: read
       packages: write
