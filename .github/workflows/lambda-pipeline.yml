@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: TA-lambda
+  IMAGE_NAME: talambda
       
 jobs:
   tests:
