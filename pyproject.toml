@@ -4,7 +4,7 @@ version = "1.0.0"
 description = ""
 authors = ["Guillaume Ros <guillaume.ros.pro@gmail.com>"]
 readme = "README.md"
-packages = [{include = "app"}]
+packages = [{include = "src/app"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
