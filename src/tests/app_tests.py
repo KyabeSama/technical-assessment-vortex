@@ -12,5 +12,5 @@ import pytest
 )
 def test_lambda_handler(event: LambdaEvent, exptectedcode, expectedmessage):
     returned = lambda_handler(event, LambdaContext)
-    assert returned['statusCode'] == exptectedcode
+    assert returned['statuscode'] == exptectedcode
     assert returned['body'] == f"The received message is: '{expectedmessage}'"
