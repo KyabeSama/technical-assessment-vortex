@@ -67,7 +67,7 @@ Fill the `Dockerfile` to package your lambda function using the base image `publ
 Write a bash command to build the image from the `Dockerfile`.
 
 ```bash
-...
+docker build -t technical-assessment-lambda .
 ```
 
 ## 🎯 Check the Local Invocation of the Application
@@ -79,7 +79,7 @@ Using the Docker image and the small bash script below, check that the lambda fu
 ```bash
 docker run -p 3001:8080 ${DOCKER_IMAGE}:latest
 
-curl -d @events/event.json  http://localhost:3001/2015-03-31/functions/function/invocations
+curl -d @src/events/event.json  http://localhost:3001/2015-03-31/functions/function/invocations
 ```
 
 Propose a solution to automate the check of the `curl` response in the CI.

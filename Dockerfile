@@ -7,7 +7,9 @@ FROM public.ecr.aws/lambda/python:3.12
 # can be generated using 'poetry export --without-hashes > lambda_app/requirements.txt'
 # before building the image with 'docker build ...'
 
-RUN ...
+COPY requirements.txt /var/task
+# Copy function code
+COPY src/app/app.py /var/task
 
-# Set CMD so that the entry point of the lambda is the 'lambda_handler' function.
-CMD ...
+# Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+CMD [ "app.lambda_handler" ]
