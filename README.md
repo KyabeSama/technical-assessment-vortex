@@ -93,6 +93,7 @@ Deploy your lambda application in the cluster.
 **Hints**
 1. You can create a local Kubernetes cluster with the following command:
 ```
+CLUSTER=talamdba
 k3d cluster create ${CLUSTER} \
     --registry-create ${CLUSTER}:${CLUSTER_REGISTRY_PORT} \ # Create a Docker registry inside the cluster
     -p 5432:5432@loadbalancer # Expose a port outside the cluster (e.g. the Lambda port)
@@ -106,6 +107,35 @@ docker tag ${DOCKER_IMAGE} localhost:${CLUSTER_REGISTRY_PORT}/${DOCKER_IMAGE} &&
 Write a small bash script to invoke the lambda function deployed in the cluster using `curl` with the event files from `events`.
 ```bash
 ...
+```
+
+## 🎯 Deploy Your Application in a Local Kubernetes Cluster - Solution
+
+Deploy a K3d cluster
+
+```bash
+k3d cluster create mycluster
+kubectl get nodes # check cluster is ok
+```
+
+Create a kubernetes Deployment in `kubernetes/deployment.yaml`
+Apply the deployment to the cluster
+
+```bash
+kubectl apply -f deployment.yaml
+kubectl get deployment # check deployment status
+kubectl get pods # check pod status
+```
+
+Port forward the listening port of the pod to my local machine
+
+```bash
+kubectl port-forward lambda-deployment-fd5c9df4f-d947k 9090 8080
+```
+Test the port forward
+
+```bash
+curl -d @src/events/event.json  http://127.0.0.1:8080/2015-03-31/functions/function/invocations
 ```
 
 ## 🎯 Automate Kubernetes Cluster and Application Deployment

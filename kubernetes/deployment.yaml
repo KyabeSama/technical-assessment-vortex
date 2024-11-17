@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lambda-deployment
+spec:
+  replicas: 1  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: lambda
+  template:
+    metadata:
+      labels:
+        app: lambda
+    spec:
+      containers:
+      - name: lambda-container
+        image: ghcr.io/kyabesama/technical-assessment-vortex:main  # Replace with your image
+        ports:
+        - containerPort: 8080
